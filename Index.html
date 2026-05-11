@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brendan Dunigan | The Patch Web Co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+```
+:root {
+  --sage: #6b7c5c;
+  --sage-dark: #4e5c42;
+  --sage-light: #8fa07a;
+  --cream: #f7f3ec;
+  --cream-dark: #ede7db;
+  --ink: #2a2e25;
+  --muted: #7a7e74;
+}
+
+body {
+  background: var(--cream);
+  font-family: 'Jost', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(107,124,92,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(107,124,92,0.06) 0%, transparent 50%);
+}
+
+.card {
+  background: var(--cream);
+  border: 1.5px solid rgba(107,124,92,0.25);
+  border-radius: 20px;
+  max-width: 420px;
+  width: 100%;
+  padding: 44px 40px 36px;
+  box-shadow:
+    0 2px 6px rgba(42,46,37,0.06),
+    0 12px 40px rgba(42,46,37,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+  animation: fadeUp 0.6s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--sage-dark), var(--sage-light), var(--sage-dark));
+  border-radius: 20px 20px 0 0;
+}
+
+/* Subtle texture overlay */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: 20px;
+  opacity: 0.5;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s 0.1s ease both;
+  opacity: 0;
+}
+
+.logo-patch {
+  width: 36px;
+  height: 36px;
+  background: var(--sage);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-patch svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--cream);
+}
+
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--sage-dark);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.brand-tagline {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.divider {
+  width: 40px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--sage), transparent);
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s 0.2s ease both;
+  opacity: 0;
+}
+
+.name-block {
+  margin-bottom: 6px;
+  animation: fadeUp 0.6s 0.25s ease both;
+  opacity: 0;
+}
+
+.name {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.title {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-top: 6px;
+  animation: fadeUp 0.6s 0.3s ease both;
+  opacity: 0;
+}
+
+.service-line {
+  font-family: 'Jost', sans-serif;
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--muted);
+  margin: 18px 0 28px;
+  line-height: 1.5;
+  border-left: 2px solid var(--sage-light);
+  padding-left: 12px;
+  animation: fadeUp 0.6s 0.35s ease both;
+  opacity: 0;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  animation: fadeUp 0.6s 0.4s ease both;
+  opacity: 0;
+}
+
+.contact-icon {
+  width: 30px;
+  height: 30px;
+  background: var(--cream-dark);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--sage-dark);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-text {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact-text:hover { color: var(--sage); }
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.5s ease both;
+  opacity: 0;
+}
+
+.btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 11px 16px;
+  border-radius: 10px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+  border: none;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--sage);
+  color: var(--cream);
+  box-shadow: 0 2px 10px rgba(107,124,92,0.3);
+}
+
+.btn-primary:hover {
+  background: var(--sage-dark);
+  box-shadow: 0 4px 16px rgba(107,124,92,0.4);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--cream-dark);
+  color: var(--sage-dark);
+  border: 1px solid rgba(107,124,92,0.2);
+}
+
+.btn-secondary:hover {
+  background: #e4ddd2;
+  transform: translateY(-1px);
+}
+
+.btn svg {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.qr-section {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(107,124,92,0.15);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: fadeUp 0.6s 0.6s ease both;
+  opacity: 0;
+}
+
+.qr-wrap {
+  background: white;
+  border-radius: 10px;
+  padding: 8px;
+  border: 1px solid rgba(107,124,92,0.15);
+  flex-shrink: 0;
+}
+
+#qrcode canvas, #qrcode img {
+  display: block;
+  border-radius: 4px;
+}
+
+.qr-label {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.qr-label strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sage-dark);
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 2px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+```
+
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="logo-row">
+    <div class="logo-patch">
+      <!-- Simple leaf/patch icon -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C6 2 3 7 3 12c0 4 2.5 7.5 6 9l1-4c-2-1-3.5-3-3.5-5 0-3.5 2.5-6 5.5-6s5.5 2.5 5.5 6c0 2-1.5 4-3.5 5l1 4c3.5-1.5 6-5 6-9 0-5-3-10-9-10z"/>
+      </svg>
+    </div>
+    <div>
+      <div class="brand-name">The Patch Web Co.</div>
+      <div class="brand-tagline">the-patch-web-co.vercel.app</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="name-block">
+    <div class="name">Brendan Dunigan</div>
+  </div>
+  <div class="title">Owner</div>
+
+  <div class="service-line">
+    Affordable websites for small businesses
+  </div>
+
+  <div class="contact-row">
+    <div class="contact-icon">
+      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+    </div>
+    <a class="contact-text" href="mailto:Kbdbusiness98@gmail.com">Kbdbusiness98@gmail.com</a>
+  </div>
+
+  <div class="contact-row" style="animation-delay:0.45s">
+    <div class="contact-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+    </div>
+    <a class="contact-text" href="https://the-patch-web-co.vercel.app" target="_blank">the-patch-web-co.vercel.app</a>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="downloadVCard()">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Save Contact
+    </button>
+    <a class="btn btn-secondary" href="https://the-patch-web-co.vercel.app" target="_blank">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Visit Site
+    </a>
+  </div>
+
+  <div class="qr-section">
+    <div class="qr-wrap">
+      <div id="qrcode"></div>
+    </div>
+    <div class="qr-label">
+      <strong>Scan to visit</strong>
+      Point your camera here to open<br>The Patch Web Co. website.
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">Contact saved!</div>
+
+<script>
+  // Generate QR code
+  new QRCode(document.getElementById("qrcode"), {
+    text: "https://the-patch-web-co.vercel.app",
+    width: 90,
+    height: 90,
+    colorDark: "#4e5c42",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+
+  // vCard download
+  function downloadVCard() {
+    const vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "FN:Brendan Dunigan",
+      "ORG:The Patch Web Co.",
+      "TITLE:Owner",
+      "EMAIL;TYPE=WORK:Kbdbusiness98@gmail.com",
+      "URL:https://the-patch-web-co.vercel.app",
+      "NOTE:Affordable websites for small businesses",
+      "END:VCARD"
+    ].join("\n");
+
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Brendan-Dunigan-PatchWebCo.vcf";
+    a.click();
+    URL.revokeObjectURL(url);
+
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2500);
+  }
+</script>
+
+</body>
+</html>
